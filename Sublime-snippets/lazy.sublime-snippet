@@ -1,0 +1,77 @@
+<snippet>
+	<content><![CDATA[
+void buildTree(lli tree[],lli arr[],lli lazy[],lli start,lli end,lli treeNode){
+	if(start==end){
+		tree[treeNode]=arr[start];
+		return;
+	}
+	lli mid=(start+end)/2;
+	buildTree(tree,arr,lazy,start,mid,2*treeNode);
+	buildTree(tree,arr,lazy,mid+1,end,2*treeNode+1);
+	tree[treeNode]=tree[2*treeNode]+tree[2*treeNode+1];
+}
+
+void UpdateTreeLazyProp(lli *tree,lli arr[],lli *lazy,lli start,lli end,lli srange,lli erange,lli value,lli treeNode){
+// if(start>end)
+// 	return;
+//Always update the previous pending update on the node we reach
+if(lazy[treeNode]!=0){
+	tree[treeNode]+=lazy[treeNode];
+	//not a leaf node
+	if(start!=end){
+	lazy[2*treeNode]+=lazy[treeNode];
+    lazy[2*treeNode+1]+=lazy[treeNode];
+}
+    lazy[treeNode]=0;
+}
+//start end are the values of index range stored on treenode index of tree
+//node completely inside the given range
+if(start>=srange && end<=erange){
+	tree[treeNode]+=value;
+	if(start!=end){
+	lazy[2*treeNode]+=value;
+	lazy[2*treeNode+1]+=value;
+}
+ return;
+}
+//node completely outside
+if(start>erange || end<srange){
+	return;
+}
+//node partially inside
+lli mid=(start+end)/2;
+UpdateTreeLazyProp(tree,arr,lazy,start,mid,srange,erange,value,2*treeNode);
+UpdateTreeLazyProp(tree,arr,lazy,mid+1,end,srange,erange,value,2*treeNode+1);
+tree[treeNode]=tree[2*treeNode]+tree[2*treeNode+1];
+
+}
+
+//range query may be demanded at the nodes which are not updated yet
+lli RangeQueryLazyProp(lli tree[],lli arr[],lli lazy[],lli start,lli end,lli left,lli right,lli treeNode){
+//Step1 :update the value at current node
+	if(lazy[treeNode]!=0){
+	tree[treeNode]+=lazy[treeNode];
+	if(start!=end){
+	lazy[2*treeNode]+=lazy[treeNode];
+    lazy[2*treeNode+1]+=lazy[treeNode];
+}
+    lazy[treeNode]=0;
+}
+
+//completely outside
+if(start>right || end<left)
+return 0;
+if(start>=left && end<=right)
+return tree[treeNode];
+lli mid=(start+end)/2;
+lli ans=RangeQueryLazyProp(tree,arr,lazy,start,mid,left,right,2*treeNode)+RangeQueryLazyProp(tree,arr,lazy,mid+1,end,left,right,2*treeNode+1);
+return ans;
+}
+
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>lazy</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

@@ -1,0 +1,22 @@
+<snippet>
+	<content><![CDATA[
+bool cycleundfs(vector<int>* adj,bool vis[],int v,int parent){
+
+	vis[v]=true;
+
+	for(auto i:adj[v]){
+		if(!vis[i])
+			return cycleundfs(adj,vis,i,v);
+		else if(i!=parent) //if adjacent of current vertex is visited and it is not the parent of current vertex v, then cycle is present
+			return true;
+	}
+
+//reaches here when all visited and no detected case in its child
+	return false;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cycleundfs</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

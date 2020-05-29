@@ -1,0 +1,31 @@
+<snippet>
+	<content><![CDATA[
+map<int,int> p;
+void dfsr(int x,vector<int>* adj,bool* vis){
+    //Current Element (Stack top), node veing visited area (Note: stack top element can only be accessed)
+     cout<<x<<endl;
+    vis[x]=true;
+    
+    
+    // Child of the current node
+    for(auto j:adj[x])
+    {
+        if(!vis[j]){
+        //going into the child j to be explored which is not explored yet.
+        p[j]=x;
+        dfsr(j,adj,vis);
+     //   cout<<x<<endl;
+        // One child j visited and its work is done.... Returning from the child(j processed) back to current node x.
+        }
+    }
+    
+    // Returning to current node after visiting all childs(processed).. Time to pop the stack
+    
+  //  cout<<x<<endl;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>dfs</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

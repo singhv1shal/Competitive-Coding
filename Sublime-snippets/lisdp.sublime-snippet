@@ -1,0 +1,36 @@
+<snippet>
+	<content><![CDATA[
+/*
+  mem(LISdp,-1);
+int ans=INT_MIN;
+    for(int i=0;i<v.size();i++)
+    ans=max(ans,_lis(v,i));
+int ans2=*max_element(LISdp,LISdp+v.size());
+cout<<ans2<<endl;
+cout<<ans<<endl;
+
+*/
+int LISdp[1000001];
+int _lis(vector<int>& v,int curr){
+if(curr==0)
+    return 1;
+int ans=INT_MIN;
+for(int i=curr-1;i>=0;i--){
+    if(v[i]<v[curr]){
+        if(LISdp[i]!=-1)
+            ans=max(ans,1+LISdp[i]);
+        else{
+        ans=max(ans,1+_lis(v,i));
+    }
+    }
+}
+LISdp[curr]=ans;
+return ans;
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>lisdp</tabTrigger>
+		<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.c++</scope> -->
+</snippet>

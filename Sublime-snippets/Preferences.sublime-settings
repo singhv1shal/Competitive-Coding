@@ -1,0 +1,18 @@
+{
+	"build_schemas":
+	{
+		"cpp":
+		{
+			"input_end": "*/",
+			"input_start": "/*input",
+			"shell_cmd": "g++ \"${file}\" -o \"${file_path}/${file_base_name}\" && \"${file_path}/${file_base_name}\""
+		}
+	},
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.sublime-color-scheme",
+	"font_size": 10,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"theme": "Default.sublime-theme"
+}

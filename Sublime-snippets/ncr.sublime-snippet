@@ -1,0 +1,27 @@
+<snippet>
+	<content><![CDATA[
+/********************* Store factorial%md and invFact%md for element less than 1000 ***************/
+
+lli fact[1000001],invfact[1000001];
+
+lli nCr(lli n, lli r) 
+{ 
+return (((fact[n]*invfact[r])% md)*invfact[n-r])% md; 
+} 
+
+void store(){
+	fact[0]=1;
+	int i,j;
+	for (i=1 ; i<1000001; i++){
+	fact[i] = (fact[i-1]*(i%md))%md;
+	}
+	for(i=0;i<1000001;i++){
+		invfact[i]=power(fact[i],md-2);
+	}
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>ncr</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

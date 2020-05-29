@@ -1,0 +1,43 @@
+<snippet>
+	<content><![CDATA[
+// LIS nlogn approach
+
+void LIS(vector<int>& v){
+    vector<int> last;
+    vector<int> previndex(v.size(),-1);
+    vector<int> tailindex;
+    
+    last.pb(v[0]);
+    tailindex.pb(0);
+
+    for(int i=1;i<v.size();i++){
+       int id=(int)(lower_bound(last.begin(),last.end(),v[i])-last.begin());
+        if(id>=last.size()){
+            last.pb(v[i]);
+            if(tailindex.size()>0)
+            previndex[i]=tailindex[tailindex.size()-1];
+            tailindex.pb(i);
+        }
+        else{
+            last[id]=v[i];
+            if(id>0)
+            previndex[i]=tailindex[id-1];
+            tailindex[id]=i;  
+        }
+    }
+
+    cout<<last.size()<<endl;
+   
+
+    //print lis
+    // int n=tailindex.size()-1;
+    //  for(int i=tailindex[n];i>=0;i=previndex[i])
+    //     cout<<v[i]<<" ";
+  
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>lis</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

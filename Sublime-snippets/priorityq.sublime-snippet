@@ -1,0 +1,27 @@
+<snippet>
+	<content><![CDATA[
+/*
+  //max heap  priority_queue<pqdata,vector<pqdata>,pqcomp> pq;
+  //min heap  priority_queue<pqdata,vector<pqdata>,pqcomp2> pq2;
+*/
+struct pqdata{
+    int key;
+    int val;
+};
+
+struct pqcomp{
+    bool operator()(pqdata A,pqdata B){
+        return A.key<B.key;
+    }
+};
+struct pqcomp2{
+    bool operator()(pqdata A,pqdata B){
+        return A.key>B.key;
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>priorityq</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.c++</scope> -->
+</snippet>

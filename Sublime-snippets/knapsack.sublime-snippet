@@ -1,0 +1,39 @@
+<snippet>
+	<content><![CDATA[
+void knapsack(int W,int w[],int v[],int n){
+    int dp[n][W+1];
+    mem(dp,0);
+    //dp[i][j]: stores max value if i items to cover(from start) and j weight left free in knapsack
+
+    /*
+     eg., d if(j-w[i]>=0)
+       dp[i][j]=max(dp[i][j],v[i]+dp[i-1][j-w[i]]);
+    if we include ith item and current weight left is j, then its value will be i-1 to cover with j-w[i] weight left
+       */
+   for(int i=0;i<n;i++){
+      for(int j=0;j<W+1;j++){
+        if(i==0 || j==0)
+            continue;
+        if(j-w[i]>=0)
+        dp[i][j]=max(dp[i][j],v[i]+dp[i-1][j-w[i]]);
+      }
+   }
+   cout<<dp[n-1][W]<<endl;
+
+//recursive
+   /*
+    if(W-w[0]>=0)
+    return max(ks(W-w[0],w+1,v+1,n-1),ks(W,w+1,v+1,n-1));
+    store dp[n][W];
+    dp[i][j] stores if n items left (from end) and W weight left what is the maximum value we can get   
+
+    cout<<dp[0][0];
+*/
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>knapsack</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

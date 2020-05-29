@@ -1,0 +1,22 @@
+<snippet>
+	<content><![CDATA[
+	int n,e;
+	cin>>n;
+	${1:cin>>e;}
+	int depth[n];
+	vector<int> adj[n];
+
+	for(int i=0;i<e;i++){
+		int b,c;
+		cin>>b>>c;
+		b--;
+		c--;
+		adj[b].pb(c);
+		adj[c].pb(b);
+	}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>graph</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

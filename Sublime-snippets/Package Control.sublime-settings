@@ -1,0 +1,17 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Anaconda",
+		"C++11",
+		"Code Runner",
+		"More Layouts",
+		"Package Control",
+		"Selenium Snippets",
+		"Sublime Input",
+		"sublime-text-2-buildview"
+	]
+}

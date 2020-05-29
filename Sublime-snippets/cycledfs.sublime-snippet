@@ -1,0 +1,29 @@
+<snippet>
+	<content><![CDATA[
+
+// Recursive function to find if there is back edge 
+// in DFS subtree tree rooted with 'v' 
+bool cycleDFS(vector<int>* adj,int vis[],int v){
+
+		vis[v]=1;
+
+		for(auto i:adj[v]){
+			//current node is in stack
+			if(vis[i]==1)
+				return true;
+			//this node is unvisited and not in stack
+			else if(!vis[i])
+				return cycleDFS(adj,vis,i);
+			//this node is already visited and not in stack vis[i]=2
+		}
+		
+	vis[v]=2;
+	return false;
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cycledfs</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	 <scope>source.c++</scope>
+</snippet>

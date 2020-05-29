@@ -1,0 +1,39 @@
+<snippet>
+	<content><![CDATA[
+/************************************************* TRIES *******************************************************************/
+/* 
+
+make head node and number of child, type of value
+to make trie insert elements to trie
+to find ans make a find ans function
+
+*/
+
+class trieNode{
+public:
+	int value;
+	trieNode* child[26];
+	trieNode(){
+		value=-1;
+		for(int i=0;i<26;i++)
+		child[i]=NULL;
+	}
+};
+
+void insertTrie(string s,trieNode* head,int val){
+	trieNode* curr=head;
+	for(int i=0;i<s.size();i++){
+		int x=s[i]-'a';
+		if(!curr->child[x])
+			curr->child[x]=new trieNode();
+		curr=curr->child[x];
+		// code for value
+	}
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>triestring</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

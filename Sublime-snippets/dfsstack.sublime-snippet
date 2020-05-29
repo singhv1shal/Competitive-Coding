@@ -1,0 +1,44 @@
+<snippet>
+	<content><![CDATA[
+void dfs(int x,vector<int>* adj,bool* vis){
+  mem(vis,false);
+  stack<int> s;
+  s.push(x);
+  //vis[x]=true;
+  int flag=0;
+
+  while(!s.empty()){
+    int y=s.top();
+    if(!vis[y])
+    cout<<y<<endl;
+        vis[y]=true;
+    flag=0;
+    //if s1.top()==target element... the path would be :
+    // stack<int> s1(s);
+    // while(!s1.empty()){
+    //   cout<<s1.top()<<"* ";
+    //   s1.pop();
+    // }
+    // cout<<endl;
+    
+      for(vector<int>::iterator i=adj[y].begin();i!=adj[y].end();i++){
+        if(!vis[*i])
+        { 
+          flag=1;
+          s.push(*i);
+        //  vis[*i]=true;
+          break;
+        }
+      }
+      if(!flag)
+        s.pop();
+    
+  }
+
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>dfsstack</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

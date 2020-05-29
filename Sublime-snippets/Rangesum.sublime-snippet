@@ -1,0 +1,47 @@
+<snippet>
+	<content><![CDATA[
+void buildTree(lli* tree,lli arr[],lli start,lli end,lli treeNode){
+if(start==end){
+    tree[treeNode]=arr[start];
+    return;
+}
+lli mid=(start+end)/2;
+buildTree(tree,arr,start,mid,2*treeNode);
+buildTree(tree,arr,mid+1,end,2*treeNode+1);
+tree[treeNode]=tree[2*treeNode]+tree[2*treeNode+1];
+}
+
+void UpdateTree(lli* tree,lli arr[],lli start,lli end,lli idx,lli value,lli treeNode){
+if(start==end){
+    arr[idx]=value;
+    tree[treeNode]=value;
+    return;
+}
+lli mid=(start+end)/2;
+if(idx<=mid)
+UpdateTree(tree,arr,start,mid,idx,value,2*treeNode);
+else
+UpdateTree(tree,arr,mid+1,end,idx,value,2*treeNode+1);
+tree[treeNode]=tree[2*treeNode]+tree[2*treeNode+1];
+}
+
+lli RangeQuery(lli* tree,lli arr[],lli start,lli end,lli left,lli right,lli treeNode){
+	if(start>=left && end<=right){
+    return tree[treeNode];
+	}
+	if(start>right || end<left){
+    return 0;
+	}
+	lli mid=(start+end)/2;
+
+    lli ans1=RangeQuery(tree,arr,start,mid,left,right,2*treeNode);
+    lli ans2=RangeQuery(tree,arr,mid+1,end,left,right,2*treeNode+1);    
+
+    return ans1+ans2;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>seg</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

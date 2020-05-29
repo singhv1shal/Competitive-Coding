@@ -1,0 +1,55 @@
+<snippet>
+	<content><![CDATA[
+set<int> art_p;
+vector<pair<int,int>> bridges; //articulation and bridges
+int tim; //time
+// disc discovery time
+// low lowest time
+
+void dfs(vector<int>* adj,int cur,int par,vector<int> &disc,vector<int> &low){
+    disc[cur]=low[cur]=tim++;
+    int no_child=0;
+    
+    for(auto nbr:adj[cur]){
+        if(disc[nbr]==INT_MAX){
+            no_child++;
+            dfs(adj,nbr,cur,disc,low);
+            low[cur]=min(low[cur],low[nbr]);
+
+             if(low[nbr]>disc[cur])
+                bridges.push_back({cur,nbr});
+             if(par!=-1 && low[nbr]>=disc[cur])
+                art_p.insert(cur);
+
+        }
+        //handling backedge
+        else if(nbr!=par){
+            // backedge/cycle found
+            low[cur]=min(low[cur],disc[nbr]); //disc[nbr] is time where backedge is pointing to
+        }
+    }
+
+    //separate case for parent node
+    if(par==-1 && no_child>=2){
+        art_p.insert(cur);
+    }
+
+}
+
+void articulation(vector<int> *adj,int n){
+    vector<int> low(n,INT_MAX),disc(n,INT_MAX);
+    tim=1;
+    dfs(adj,0,-1,disc,low);
+
+    for(auto i:art_p) cout<<i<<" ";
+        cout<<endl;
+    for(auto bridge:bridges){
+        cout<<bridge.first<<"->"<<bridge.second<<endl;
+    }
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>articulation</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
