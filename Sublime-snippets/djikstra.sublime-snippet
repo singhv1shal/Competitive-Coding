@@ -1,0 +1,62 @@
+<snippet>
+	<content><![CDATA[
+
+#define INF INT_MAX
+vector<pair<int,int>> shortTree[100001];
+
+void djikstra(vector<pair<int,int>>* adj,int source,int n){
+        bool visited[n];
+        int parent[n];
+        set<pair<int,int>> pq;
+        int dist[n];
+
+        for(int i=0;i<n;i++){
+          parent[i]=-1;
+          visited[i]=false;
+          dist[i]=INF;
+        }
+
+        dist[source]=0;
+        pq.insert({dist[source],source});
+        while(!pq.empty()){
+         
+          auto cur=*pq.begin();
+          pq.erase(cur);
+          visited[cur.second]=true;
+        
+          int u=cur.second;
+          int v=parent[cur.second]; // array that stores the parent which led to insertion of this weight
+          int w=cur.first;
+
+          if(v!=-1){
+          shortTree[u].push_back({v,w});
+          shortTree[v].push_back({u,w});
+           }
+
+          for(auto nbr:adj[cur.second]){
+            if(!visited[nbr.first]){
+              if(dist[nbr.first]>cur.first+nbr.second)
+              {
+                pq.erase({dist[nbr.first],nbr.first});
+                parent[nbr.first]=cur.second;
+                dist[nbr.first]=nbr.second+cur.first;
+                pq.insert({dist[nbr.first],nbr.first});
+              }
+            }
+          } 
+
+        }
+        //int ans=0;
+        for(int i=0;i<n;i++){
+          cout<<i<<" "<<parent[i]<<" "<<dist[i]<<endl;
+      //    ans+=dist[i];
+        }
+        //cout<<ans<<endl;
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>djikstra</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

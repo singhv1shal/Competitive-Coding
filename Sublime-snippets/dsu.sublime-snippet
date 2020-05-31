@@ -7,10 +7,8 @@ int parent[n+1];
     parent[i]=i;
 */
 int find(int x,int parent[]){
-  int y=parent[x];
-  if(y==x)
-    return x;
-  parent[x]=find(y,parent);
+  if(parent[x]==x) return x;
+  parent[x]=find(parent[x],parent); //path compression
   return parent[x];
 
 }
